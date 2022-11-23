@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { WalletIntegrationService } from '../../services/wallet-integration/wallet-integration.service';
 
 @Component({
     standalone: true,
@@ -7,5 +8,11 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     styleUrls: ['./wallet-integration.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class WalletIntegrationComponent {
+export class WalletIntegrationComponent implements OnInit {
+    constructor(private walletIntegrationService: WalletIntegrationService) {
+    }
+
+    public ngOnInit(): void {
+        this.walletIntegrationService.initMetaMaskConnection();
+    }
 }
