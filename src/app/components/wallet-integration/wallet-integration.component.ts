@@ -13,6 +13,7 @@ export class WalletIntegrationComponent implements OnInit {
     }
 
     public ngOnInit(): void {
-        this.walletIntegrationService.initMetaMaskConnection();
+        this.walletIntegrationService.initMetaMaskConnection()
+            .then(() => this.walletIntegrationService.connectToContract());
     }
 }
