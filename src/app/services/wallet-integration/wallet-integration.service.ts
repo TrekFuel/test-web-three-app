@@ -9,6 +9,9 @@ export class WalletIntegrationService {
     private _signer: ethers.providers.JsonRpcSigner = {} as ethers.providers.JsonRpcSigner;
     private _erc20: Contract = {} as Contract;
 
+    private readonly address = '0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6';
+    private readonly abi = ['function approve(address _spender, uint256 _value) public returns (any state)'];
+
     public get provider(): ethers.providers.Web3Provider {
         return this._provider;
     }
@@ -29,8 +32,11 @@ export class WalletIntegrationService {
     }
 
     public connectToContract(): void {
-        const abi = ['function symbol() view returns (string)'];
-        const address = '0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6';
-        this._erc20 = new ethers.Contract(address, abi, this._signer);
+        this._erc20 = new ethers.Contract(this.address, this.abi, this._signer);
+    }
+
+
+    public async approveContract(): Promise<any> {
+        return await this.erc20['approve'](this.address, ethers.utils.parseUnits('1.0', 'wei'));
     }
 }
