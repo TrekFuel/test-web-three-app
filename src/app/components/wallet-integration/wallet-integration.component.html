@@ -1,3 +1,4 @@
 <a *ngIf="txHash" [href]="explorerUrl + txHash" target="_blank">
     <p>{{txHash}}</p>
 </a>
+<p *ngIf="nonce">{{nonce}}</p>
